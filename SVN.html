@@ -1,0 +1,135 @@
+SVN:
+--------
+Sub Version: check in and check out
+
+* Repository maintains for safety side and contains project code.
+* Hard disk in one machine
+
+SVN  repository 													Developer 1
+---------------------                                                    ------------------																					
+Project 1 -----------------check out ------------> Project 1
+(File 1 int x=0)														* he must have credentials to repository
+																					1. URL
+																					2. username
+																					3. password
+
+(File 1 int x=100)   <------checkin/commit------File 1 (int x=100) modifies by Developer 1
+																					
+																					
+																					Developer 2
+																					-------------------
+																					He must always get updated code before code
+																				
+																				
+How will you know if the code is changed?
+---------------------------------------------------------
+SVN -- there will be star mark after editing and not matched with repository
+CVS -- arrow mark
+
+Right click the File --> Replace with --> Latest repository
+
+For comparing code:
+-----------------------------
+Right click file --> compare with --> Local history --> Versions will come
+
+Whenever commiting the code we always change the version.
+In project we have build.properties --> project.version --> 11.0.37 (change it here)
+
+Local history == repository history.....
+
+Checkout a project in Eclipse:
+---------------------------------------------
+Select import --> checkout projects from SVN -->
+
+In CVS:
+----------
+1. host and username and password
+
+In Clear Case:
+--------------------
+we have locking mechanism, if developer 1 is working on File 1, then the developer 2 is cannot work on File1
+
+
+SVN Repository Layout:
+------------------------------------
+1. Trunk 			2. Branches 			3. Tags
+
+Trunk: used for development phase
+
+branch: (for release activities)
+* Once the development is completed, we need to create a branch 
+to happen release activities from trunk.
+
+Tag: Labeling the released versions
+* Once the final build is released, we create an archive/label called tag
+representing the code version which is released
+
+For Post release activities like maintainence, hard fix delivery then we need to create a 
+branch from tag.
+
+
+Trunk   (Dev complete) ------ > Branch (Prepare for release)
+
+Step1:
+Right click trunk folder ---> svn --> click branch/tag --> Give path /branches/app-1.0 
+--> message  -- >Choose latest (HEAD) or specific revision --> commit
+
+Now revision number is increased.
+
+Every change in SVN is recognized using revision number.
+
+Step 2: checkout code from branch into trunk folder -- > make changes and commit back
+in branch path
+
+Step 3: Now release, right click app-1.0 folder --> create tag /tags/app-1.0-release --> commit
+
+step4: if any changes after release, checkout code from tag and create branch app-1-hotfix/fixpipe
+Like windows updates 
+--------------------------------------------------------------------------------------
+CONFLICT --- MERGE CONFLICT: 
+Working on the release branch: tag
+-------------------------------------------------
+
+* making a change in file -- commit into branch 
+* make one more commit into branch itself
+
+Now we merge, take trunk --  click SVN update -- see log --done merge  (revision is 5-7)
+Latest revision number is called HEAD
+
+make a Revision range to merge (7 to 10) -- merge
+url to merge from: branches/app-1.0
+working copy is trunk
+
+right click for diff or compare with
+
+* Finally commit the changes "done the merge from revisions
+7-10 and committed them to repos " 
+
+develop ++ trunk --> file.txt ----> making a change and commit (rev-12)
+testing ++ app 1.0 --> file.txt ----> making a chnage and commit (rev-13)
+
+now if i merge from app 1.0 to trunk, 
+check for last revision range in log which was (7-10)
+now we need to merge revision from 10-13
+conflict comes --- it will make a change in the source (app 1.0) and apply in the 
+destination
+
+now you have made a change in both source and destination,
+SVN got confused in merge, and asking us to resolve
+Click resolve all later --- merge finished and show which one is conflicted
+You can right click edit conflict --- will show the problem
+
+theirs is testing team (app 1.0) we can see change done in line number 8
+mine is develop team (trunk) we can see change in line number same 8
+
+it will ask configuration generar to help coordinate with develop team
+right click on line --- use this test block
+										use text block from theirs before mine
+conflict resolved now first testing line and then devlop line will come
+
+now commiting from root which holds trunk and app 1.0-release
+ "merge from 10-13 and the changes are commited" rev 14 will come
+
+
+
+

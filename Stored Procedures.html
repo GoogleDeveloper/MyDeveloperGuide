@@ -1,0 +1,164 @@
+Stored Procedures:
+-----------------------------
+* Group of SQL statements grouped together and executed
+
+Creating a Procedure:
+-------------------------------
+USE MOVIES 					-- DB name                                 
+GO 										-- begins a new batch
+CREATE PROC MovieProc                --- Highlight movieProc and execute
+AS
+BEGIN
+SELECT
+	FILMNAME, FILMRELEASE, FILMTIME 
+FROM
+	MOVIETable
+ORDER BY 
+	FILMNAME ASC
+END
+
+Executing a Procedure:
+----------------------------------
+EXECUTE MovieProc     --- Refresh local cache before executing by Edit -- intellisense -- refresh
+
+Modifying a procedure:
+---------------------------------
+Right click procedure --- modify
+
+or 
+
+USE MOVIES 					-- DB name                                 
+GO 										-- begins a new batch
+ALTER PROC MovieProc                --- Highlight movieProc and execute
+AS
+BEGIN
+SELECT
+	FILMNAME, FILMRELEASE, FILMTIME 
+FROM
+	MOVIETable
+ORDER BY 
+	FILMNAME DESC          --- alteration made here
+END
+
+Deleting procedure:
+-----------------------------
+DROP PROC movieProc
+
+OR
+
+Right click procedure --> delete
+
+Parameters to Stored Procedures:
+---------------------------------------------------
+EXECUTE NewMovieProc 150   
+
+Adding a parameter:
+USE MOVIES 					-- DB name                                 
+GO 										-- begins a new batch
+CREATE PROC NewMovieProc(@MinLength AS INT)  // addedparamter (a,b,....)
+AS
+BEGIN
+SELECT
+	FILMNAME, FILMRELEASE, FILMTIME 
+FROM
+	MOVIETable
+WHERE
+	FILMTIME > @MinLength
+ORDER BY 
+	FILMNAME ASC
+END
+
+Naming parameters:
+----------------------------
+EXECUTE NewMovieProc @MinLength=150   
+
+EXECUTE NewMovieProc @Title='sivaji'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

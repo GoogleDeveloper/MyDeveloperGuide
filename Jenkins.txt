@@ -1,0 +1,111 @@
+Jenkins:
+--------
+Continuous integration tool (build + deployment + testing)
+Developed using JAVA
+Jenkins.war (web application) need web server or app server
+
+HTTP Request/Response takes place:
+----------------------------------
+client --> browser 
+server --> unix (web container "JRE" + tomcat server)
+
+* Once request is made, tomcat will search for a web application and gives response back
+
+Jenkins installation requirements:
+----------------------------------
+* Tomcat Server (catalina home path)
+* Java (jre home path)
+https://jenkins.io/ and download war file
+jenkins.war
+
+* move jenkins.war to /tomcat/webapps directory 
+
+* Once u start the tomcat server tomcat/bin/startup.sh, it will automatically will create Jenkins folder 
+
+* Inorder to confirm whether tomcat server is running,
+ps -ef | grep java
+
+* Check which port is used by tomcat server
+netstat -anp | grep java 
+eg: 8080
+
+* Now go to apache tomcat server page localhost:8080 
+* use jenkins, then localhost:8080/jenkins
+
+In root directory, .jenkins will get created and contains many folders (jobs, plugins)
+
+Now Login to tomcat server, manager option, u will see deploy option (here u can directly
+deploy war file)
+
+* if you want to restart your jenkins, then localhost:8080/jenkins/restart
+
+------------------------------------------------------------------------------------
+Need to add JAVA and ANT into Jenkins:
+--------------------------------------
+Manage Jenkins --> configure system --> Add JAVA (give java home) --> Add ANT () --> Save it
+
+In .jenkins directory, $echo JAVA_HOME --> eg: jdk 1.8 path will come
+In .jenkins directory, $echo ANT_HOME --> eg: ant 1.9 path will come
+
+Create Jobs:
+------------
+Click New Item (New job name) --> click freestyle project
+In config: give SVN path --> svn+ssh://hostname/opt/svn/helloworld
+(where is our project is existed)
+there will be subversion authentication (username/password)
+
+In Build Section --> add build setup --> Invoke ANT --> select ANT version --> 
+select build.xml from helloworld project  -- target = ALL (complete build process)
+
+In Post build options section --> if u want to get notifications (build is successfull)
+
+SAVE it....
+
+Once done then click on BUILD NOW option (checkout project from SVN and then build)
+CONSOLE OUTPUT option displays step by step done.
+
+Workspace directory is created in .jenkins section. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note:
+https://www.youtube.com/watch?v=XY-ZB3FRnxw
+
+
